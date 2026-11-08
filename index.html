@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>त्यौहार अपनों के साथ - Festive Greetings</title>
+
+  <!-- Google Fonts: Rozha One & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            hindi: ['"Yatra One"', '"Rozha One"', 'cursive', 'sans-serif'],
+            sans: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          animation: {
+            'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+            'float-up': 'floatUp linear infinite',
+            'bounce-soft': 'bounceSoft 2s infinite',
+          },
+          keyframes: {
+            pulseGlow: {
+              '0%, 100%': {
+                transform: 'scale(1)',
+                boxShadow: '0 0 20px rgba(251, 191, 36, 0.6), 0 0 40px rgba(245, 158, 11, 0.4)'
+              },
+              '50%': {
+                transform: 'scale(1.03)',
+                boxShadow: '0 0 35px rgba(251, 191, 36, 0.9), 0 0 60px rgba(234, 88, 12, 0.6)'
+              }
+            },
+            bounceSoft: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-6px)' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- React 18 & ReactDOM 18 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel Standalone for in-browser JSX parsing -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Canvas Confetti for Celebration -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* CSS Reset and Mobile Polish */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background-color: #1a0105;
+    }
+
+    /* Festival-Themed Backgrounds with Smooth Transitions */
+    .bg-festival-0 {
+      background: linear-gradient(145deg, #180206 0%, #380512 35%, #580d1d 70%, #7c220a 100%);
+    }
+    .bg-festival-1 {
+      /* Deep Diwali Night with Golden Flame Glow */
+      background: linear-gradient(145deg, #160205 0%, #3e0712 25%, #6a1415 50%, #99310c 75%, #b45309 100%);
+    }
+    .bg-festival-2 {
+      /* Sacred Govardhan Emerald Green & Nature Forest Teal */
+      background: linear-gradient(145deg, #01140e 0%, #043627 25%, #064e3b 50%, #065f46 75%, #0c3e2f 100%);
+    }
+    .bg-festival-3 {
+      /* Auspicious Bhai Dooj Crimson Red, Rose Pink & Tilak Gold */
+      background: linear-gradient(145deg, #1f020c 0%, #3e0517 25%, #690c2a 50%, #881337 75%, #9f1239 100%);
+    }
+    .bg-festival-memory {
+      /* Royal Velvet Wine, Rose Gold & Nostalgic Warmth for Family Memories */
+      background: linear-gradient(145deg, #180512 0%, #2e0821 25%, #4a0e36 50%, #340825 75%, #180313 100%);
+    }
+
+    .festival-bg-layer {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      transition: background 1.2s ease-in-out;
+    }
+
+    /* Glassmorphism Classes */
+    .glass-box {
+      background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.45);
+    }
+    .glass-btn {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-btn:hover {
+      background: rgba(255, 255, 255, 0.20);
+      border-color: rgba(251, 191, 36, 0.6);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25);
+    }
+    .glass-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Step Transition: Smooth Fade-In + Slide-Up */
+    .step-transition {
+      animation: stepFadeSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes stepFadeSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Vertical Floating Emojis Animation */
+    @keyframes floatUpwards {
+      0% {
+        transform: translateY(105vh) translateX(0) scale(0.7) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.9;
+      }
+      85% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(25px) scale(1.15) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    .floating-particle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 5;
+      will-change: transform, opacity;
+      animation-name: floatUpwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    /* Glowing Circular Gold Photo Frame */
+    .glowing-circular-frame {
+      box-shadow: 0 0 25px rgba(251, 191, 36, 0.7), 0 0 50px rgba(234, 88, 12, 0.5);
+      animation: pulseGlow 2.5s infinite alternate ease-in-out;
+    }
+
+    /* Animated equalizer wave bars */
+    .eq-bar {
+      width: 3px;
+      background-color: #facc15;
+      border-radius: 9999px;
+      animation: eqDance 0.8s ease-in-out infinite alternate;
+    }
+    .eq-bar:nth-child(1) { animation-delay: 0.1s; height: 12px; }
+    .eq-bar:nth-child(2) { animation-delay: 0.3s; height: 18px; }
+    .eq-bar:nth-child(3) { animation-delay: 0.5s; height: 10px; }
+    @keyframes eqDance {
+      0% { transform: scaleY(0.3); }
+      100% { transform: scaleY(1); }
+    }
+  </style>
+</head>
+<body class="text-white min-h-screen relative overflow-x-hidden selection:bg-amber-500 selection:text-black">
+
+  <!-- Root Mount Node -->
+  <div id="root"></div>
+
+  <!-- Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // =========================================================================
+    // 1. FULL DATA STATE & MEDIA
+    // You can easily replace the photo and audio URLs below with your own files!
+    // =========================================================================
+    const FAMILY_DATA = [
+      {
+        id: 'vishnu',
+        name: 'Vishnu Bhai',
+        hindiName: 'विष्णु भाई',
+        relation: 'Dearest Brother',
+        // Primary photo (local) + reliable online fallback
+        photo: './photos/vishnu.jpg',
+        fallbackPhoto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+        objectPosition: 'center 28%',
+        // Festival-specific celebration photos:
+        diwaliPhoto: './photos/vishnu_diwali.jpg',
+        govardhanPhoto: './photos/vishnu_govardhan.jpg',
+        bhaiDoojPhoto: './photos/vishnu_bhaidooj.jpg',
+        extraPhoto: './photos/vishnu_siblings.jpg',
+        // Audio for Vishnu Bhai (First 5 seconds skipped - "Pichhe tureya aunda ae Vadda Bai")
+        audio: './audio/vishnu_vadda_bai_trimmed.mp3',
+        tagColor: 'bg-amber-500/20 text-amber-300 border-amber-400/40',
+        // Heartfelt Festival Shayaris for Vishnu Bhai:
+        diwaliShayari: 'दीपों की तरह रोशन रहे जिंदगी आपकी,\nहर कदम पर मिले नई कामयाबी आपकी।\nभाई, आपके साथ से ही हर त्यौहार में रौनक है,\nखुशियों और मुस्कानों से भरी रहे हर घड़ी आपकी! 🪔✨',
+        govardhanShayari: 'भगवान श्री कृष्ण का मिले सदा वरदान,\nभाई, बढ़ता रहे आपका मान और सम्मान।\nगोवर्धन महाराज दूर करें जीवन के सारे कष्ट,\nसुख-समृद्धि से महकता रहे आपका हर मुकाम! 🐄🌿',
+        bhaiDoojShayari: 'माथे पर चमकता रहे तिलक का यह पावन मान,\nआप केवल भाई नहीं, हमारी ताकत और अभिमान।\nभाई, ईश्वर लंबी उम्र और असीम खुशियाँ दे आपको,\nसदा सलामत रहे भाई-बहन का यह अनमोल प्यार! 💮🔴',
+        diwaliWish: 'Bhai, may this Diwali illuminate your path to glorious victories, unending good health, and peace!',
+        govardhanWish: 'May Lord Krishna protect you with divine grace and shower unending strength upon you!',
+        bhaiDoojWish: 'No distance can ever diminish the love, prayers, and blessings between a brother and sister. Happy Bhai Dooj!'
+      },
+      {
+        id: 'krishna',
+        name: 'Krishna Bhai',
+        hindiName: 'कृष्ण भाई',
+        relation: 'Beloved Brother',
+        photo: './photos/krishna.jpg',
+        fallbackPhoto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
+        objectPosition: 'center 15%',
+        // Festival-specific celebration photos:
+        diwaliPhoto: './photos/krishna_diwali.jpg',
+        govardhanPhoto: './photos/krishna_govardhan.jpg',
+        bhaiDoojPhoto: './photos/krishna_bhaidooj.jpg',
+        extraPhoto: './photos/krishna_siblings.jpg',
+        audio: './audio/krishna_bada_bhai.mp3',
+        tagColor: 'bg-orange-500/20 text-orange-300 border-orange-400/40',
+        // Heartfelt Festival Shayaris for Krishn Bhai:
+        diwaliShayari: 'दीपक की जगमगाहट से महके हर शाम आपकी,\nदुनिया में सबसे अलग हो पहचान आपकी।\nभाई, आपके चेहरे पर सदा खिलती रहे यह मुस्कान,\nखुशियों और कामयाबी से भर जाए झोली आपकी! 🪔✨',
+        govardhanShayari: 'मुरली मनोहर कान्हा की बरसे सदा कृपा आप पर,\nगोवर्धन महाराज का हाथ रहे हमेशा आपके सिर पर।\nभाई, सुख-समृद्धि और शांति से भर जाए जीवन,\nप्रभु का आशीर्वाद बना रहे आप पर उम्र भर! 🐄🌿',
+        bhaiDoojShayari: 'तिलक लगाकर माथे पर, मांगी है रब से दुआएं हजार,\nसदा सलामत रहे हमारे भाई का यह सच्चा प्यार।\nहौसले बुलंद रहें और मंजिलें चूमें आपके कदम,\nभाई-बहन का यह पावन रिश्ता महकता रहे हर बार! 💮🔴',
+        diwaliWish: 'Wishing you boundless joy, flourishing prosperity, and infectious laughter this Diwali!',
+        govardhanWish: 'May you be blessed with the sacred purity, abundance, and warmth of Govardhan Pooja!',
+        bhaiDoojWish: 'To our sweetest brother, may success follow every step you take. Happy Bhai Dooj, Krishna Bhai!'
+      },
+      {
+        id: 'kamlesh',
+        name: 'Kamlesh Didi',
+        hindiName: 'कमलेश दीदी',
+        relation: 'Loving Elder Sister',
+        photo: './photos/kamlesh.jpg',
+        fallbackPhoto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+        objectPosition: 'center 22%',
+        // Festival-specific celebration photos:
+        diwaliPhoto: './photos/kamlesh_diwali.jpg',
+        govardhanPhoto: './photos/kamlesh_govardhan.jpg',
+        bhaiDoojPhoto: './photos/kamlesh_bhaidooj.jpg',
+        extraPhoto: './photos/kamlesh_siblings.jpg',
+        groupPhoto: './photos/kamlesh_group.jpg',
+        // Audio for Kamlesh Didi (First 5 seconds skipped - "Teri gail gail chalu teri bane parchhai"):
+        audio: './audio/kamlesh_teri_gail_trimmed.mp3',
+        tagColor: 'bg-pink-500/20 text-pink-300 border-pink-400/40',
+        // Heartfelt Festival Shayaris for Kamlesh Didi:
+        diwaliShayari: 'दीयों की रोशनी से जगमगाए आँगन आपका,\nसदा खुशियों और उमंगों से भरा रहे मन आपका।\nदीदी, ईश्वर हर बला से दूर रखे आपको,\nसुख, शांति और समृद्धि से महकता रहे जीवन आपका! 🪔✨',
+        govardhanShayari: 'गोवर्धन की पावन कृपा से हर संकट मिट जाए,\nकान्हा की मुरली की धुन से खुशियों का सावन आए।\nदीदी, अन्नकूट का यह पावन पर्व आपके लिए,\nढेरों खुशियाँ, अच्छी सेहत और बरकत लेकर आए! 🐄🌿',
+        bhaiDoojShayari: 'माथे पर सजाया आपने तिलक, उतारी भाई की आरती,\nआपकी दुआओं में है वो शक्ति जो हर मुसीबत को टालती।\nदीदी, ईश्वर आपको लंबी उम्र और सदा मुस्कुराता रखे,\nभाई-बहन के इस पावन रिश्ते को दुनिया की हर खुशी मिलती रहे! 💮🔴',
+        diwaliWish: 'दीपावली के इस पावन पर्व पर कमलेश दीदी के जीवन में सुख, शांति, समृद्धि और अपार खुशियाँ आएं। शुभ दीपावली!',
+        govardhanWish: 'भगवान श्री कृष्ण और गोवर्धन महाराज की असीम कृपा कमलेश दीदी और पूरे परिवार पर सदा बनी रहे। शुभ गोवर्धन पूजा!',
+        bhaiDoojWish: 'दीदी का पावन टीका और दिल से निकली दुआएं भाई की सबसे बड़ी ढाल हैं। भाई दूज की हार्दिक शुभकामनाएं, कमलेश दीदी!'
+      },
+      {
+        id: 'vimlesh',
+        name: 'Vimlesh Didi',
+        hindiName: 'विमलेश दीदी',
+        relation: 'Caring Sister',
+        photo: './photos/vimlesh.jpg',
+        fallbackPhoto: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&q=80',
+        objectPosition: 'center 20%',
+        // Festival-specific special memory photos:
+        diwaliPhoto: './photos/vimlesh_diwali.jpg',
+        govardhanPhoto: './photos/vimlesh_govardhan.jpg',
+        bhaiDoojPhoto: './photos/vimlesh_bhaidooj.jpg',
+        extraPhoto: './photos/vimlesh_turban.jpg',
+        // Audio for Vimlesh Didi ("Ve Tom and Jerry ja, tera mera ae rishta..."):
+        audio: './audio/vimlesh_tom_and_jerry.mp3',
+        tagColor: 'bg-rose-500/20 text-rose-300 border-rose-400/40',
+        // Heartfelt Festival Shayaris for Vimlesh Didi:
+        diwaliShayari: 'दीयों की रोशनी से जगमगाए आपका संसार,\nखुशियों से भर जाए आपका प्यारा घर-द्वार।\nदीदी आपके चेहरे की यह प्यारी सी मुस्कान,\nसदा महकती रहे जैसे खिलता हुआ गुलज़ार! 🪔✨',
+        govardhanShayari: 'गोवर्धन की पावन महिमा, कृष्ण कन्हैया का प्यार,\nदीदी आपके जीवन में आए सुख-समृद्धि अपार।\nहर कदम पर मिले प्रभु का आशीर्वाद आपको,\nसदा खुशहाल और रोशन रहे हमारा परिवार! 🐄🌿',
+        bhaiDoojShayari: 'थाल सजाकर आरती उतारी, माथे पर लगाया टीका,\nदीदी आपके प्यार और दुआओं से हर ग़म हुआ फीका।\nजब तक रहेगी यह दुनिया, रहेगा यह पावन नाता,\nभाई के दिल में सदा बसेगी आपकी ममता की छाया! 💮🔴',
+        diwaliWish: 'दीपावली के इस पावन पर्व पर आपके जीवन में सुख, समृद्धि और अपार खुशियाँ आएं। दीपों की रोशनी से आपका हर दिन जगमगाता रहे!',
+        govardhanWish: 'भगवान श्री कृष्ण आप और आपके परिवार पर अपनी कृपा सदा बनाए रखें। गोवर्धन महाराज आपके जीवन में सुख, शांति और समृद्धि भर दें।',
+        bhaiDoojWish: 'भाई-बहन के अटूट विश्वास, स्नेह और समर्पण के इस पावन पर्व पर हार्दिक बधाई। यह पवित्र रिश्ता जीवन भर यूं ही महकता रहे!'
+      },
+      {
+        id: 'membati',
+        name: 'Membati Didi',
+        hindiName: 'मेमबती दीदी',
+        relation: 'Sweet Sister',
+        photo: './photos/membati.jpg',
+        fallbackPhoto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80',
+        objectPosition: 'center 32%',
+        // Festival-specific celebration photos:
+        diwaliPhoto: './photos/membati_diwali.jpg',
+        govardhanPhoto: './photos/membati_govardhan.jpg',
+        bhaiDoojPhoto: './photos/membati_bhaidooj.jpg',
+        extraPhoto: './photos/membati_siblings.jpg',
+        familyPhoto: './photos/membati_family.jpg',
+        // Audio for Membati Didi ("Veer naal bhain vi hove, sohne lagde ne dovein..."):
+        audio: './audio/membati_veer_naal_bhain.mp3',
+        tagColor: 'bg-purple-500/20 text-purple-300 border-purple-400/40',
+        // Heartfelt Festival Shayaris for Membati Didi:
+        diwaliShayari: 'खुशियों के दीप आपके आँगन में सदा जगमगाएं,\nजीवन में आपके कभी कोई ग़म पास न आए।\nदीदी, प्यार और दुआओं से महके संसार आपका,\nदीपावली का यह पावन पर्व नई खुशियाँ और तरक्की लाए! 🪔✨',
+        govardhanShayari: 'मुरलीधर कान्हा की बरसे सदा अनुकंपा आप पर,\nगोवर्धन महाराज का रहे सदा पावन हाथ आपके सिर पर।\nदीदी, आरोग्य, शांति और सुख-समृद्धि मिले आपको,\nखुशहाली और मिठास से भरा रहे आपका हर एक सफर! 🐄🌿',
+        bhaiDoojShayari: 'चंदन का टीका और रेशम का पावन दुलार,\nदीदी, अमर रहे हमारा यह भाई-बहन का प्यार।\nमांगी है रब से यही मन्नत हर सांस में,\nखुशियों से भरी रहे आपकी दुनिया हर बार! 💮🔴',
+        diwaliWish: 'दीपावली के इस पावन अवसर पर मेमबती दीदी के जीवन में सुख, शांति, समृद्धि और अपार खुशियाँ आएं। शुभ दीपावली!',
+        govardhanWish: 'भगवान श्री कृष्ण और गोवर्धन महाराज का आशीर्वाद मेमबती दीदी पर सदा बना रहे। शुभ गोवर्धन पूजा!',
+        bhaiDoojWish: 'बहन का पावन टीका और दिल से निकला स्नेह भाई के जीवन की सबसे अनमोल पूंजी है। भाई दूज की हार्दिक शुभकामनाएं, मेमबती दीदी!'
+      },
+      {
+        id: 'memory',
+        name: 'Memories',
+        hindiName: '',
+        relation: 'Golden Family Moments',
+        photo: './photos/memory_family_temple.jpg',
+        fallbackPhoto: './photos/memory_family_temple.jpg',
+        objectPosition: 'center 30%',
+        tagColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40',
+        // Audio for Memories ("Yeh tasveer hai khwabon ke rangon ki, apnon ki..."):
+        audio: './audio/memories_yeh_tasveer_hai.mp3',
+        isMemory: true,
+        trueLines: [
+          "Family is not just an important thing. It's everything — built on love, trust, and unconditional presence.",
+          "A parents' sheltering blessing is life's strongest foundation; a sibling's laughter is its greatest treasure.",
+          "No matter where life takes us, the memories we create together will forever keep our hearts bound as one. 💖"
+        ],
+        photos: [
+          {
+            url: './photos/memory_family_temple.jpg',
+            title: 'The Entire Family United in Faith',
+            subtitle: "Sheltered by our parents' blessings, bound by eternal sibling love"
+          },
+          {
+            url: './photos/memory_parents.jpg',
+            title: 'Pillars of Our Life: Beloved Parents',
+            subtitle: 'Whose sacrifices, boundless love, and grace built our happy world'
+          },
+          {
+            url: './photos/memory_family_selfie.jpg',
+            title: 'Pure Joy, Laughter & Little Smiles',
+            subtitle: 'The radiant heartbeat of our home with siblings and little ones'
+          },
+          {
+            url: './photos/memory_siblings_group.jpg',
+            title: 'Brothers & Sisters: Companions for Life',
+            subtitle: 'Walking hand in hand together through every season of life'
+          },
+          {
+            url: './photos/memory_rakhi_blue.jpg',
+            title: 'The Sacred Thread of Protection',
+            subtitle: "A sister's prayers wrapped around a brother's wrist with eternal love"
+          },
+          {
+            url: './photos/memory_tilak_turquoise.jpg',
+            title: 'Auspicious Tilak & Sweetest Blessings',
+            subtitle: 'Traditions of honor, sweet sweets, and a sister’s heartfelt wishes'
+          },
+          {
+            url: './photos/memory_rakhi_purple.jpg',
+            title: 'Pure Devotion & Sibling Trust',
+            subtitle: 'A bond forged in childhood, blossoming into lifelong strength'
+          },
+          {
+            url: './photos/memory_wedding.jpg',
+            title: 'Celebrations & Golden Occasions',
+            subtitle: 'Dressed in traditional elegance, cherishing vibrant festive days'
+          },
+          {
+            url: './photos/memory_kids_siblings.jpg',
+            title: 'Sweet Traditions & Festive Warmth',
+            subtitle: 'Sharing festive sweets, sacred tilaks, and endless laughs'
+          },
+          {
+            url: './photos/memory_siblings_smile.jpg',
+            title: 'An Unbreakable Sibling Bond',
+            subtitle: 'A protector, a cheerleader, and a lifelong blessing'
+          }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // Web Audio Synthesizer Fallback: 
+    // Guarantees soothing Indian festive sitar melody if external audio is blocked
+    // =========================================================================
+    class FestiveMelodySynthesizer {
+      constructor() {
+        this.ctx = null;
+        this.isPlaying = false;
+        this.interval = null;
+        this.notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+      }
+      init() {
+        if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+      }
+      playChime(freq, time, duration = 1.3) {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, time);
+
+        // Harmonics
+        const overtone = this.ctx.createOscillator();
+        const overtoneGain = this.ctx.createGain();
+        overtone.type = 'triangle';
+        overtone.frequency.setValueAtTime(freq * 2, time);
+
+        gain.gain.setValueAtTime(0.001, time);
+        gain.gain.exponentialRampToValueAtTime(0.07, time + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+        overtoneGain.gain.setValueAtTime(0.001, time);
+        overtoneGain.gain.exponentialRampToValueAtTime(0.03, time + 0.05);
+        overtoneGain.gain.exponentialRampToValueAtTime(0.0001, time + duration * 0.8);
+
+        osc.connect(gain);
+        overtone.connect(overtoneGain);
+        gain.connect(this.ctx.destination);
+        overtoneGain.connect(this.ctx.destination);
+
+        osc.start(time);
+        overtone.start(time);
+        osc.stop(time + duration);
+        overtone.stop(time + duration);
+      }
+      start() {
+        this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+        if (this.isPlaying) return;
+        this.isPlaying = true;
+
+        let step = 0;
+        const melody = [0, 2, 4, 3, 5, 4, 2, 0, 4, 5, 7, 5, 4, 2, 1, 0];
+        const tick = () => {
+          if (!this.isPlaying || !this.ctx) return;
+          const now = this.ctx.currentTime;
+          const noteIndex = melody[step % melody.length];
+          const freq = this.notes[noteIndex] || 329.63;
+          this.playChime(freq, now, 1.4);
+          if (step % 4 === 0) {
+            this.playChime(130.81, now, 2.5); // Drone
+          }
+          step++;
+        };
+        tick();
+        this.interval = setInterval(tick, 450);
+      }
+      stop() {
+        this.isPlaying = false;
+        if (this.interval) {
+          clearInterval(this.interval);
+          this.interval = null;
+        }
+      }
+    }
+
+    const synthPlayer = new FestiveMelodySynthesizer();
+
+    // Trigger celebratory confetti cannon
+    function fireConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 50,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#f59e0b', '#ef4444', '#10b981', '#fbbf24', '#ec4899', '#ca8a04']
+        });
+      }
+    }
+
+    // =========================================================================
+    // DYNAMIC BACKGROUND FLOATING PARTICLES
+    // Changes emojis according to currentStep (0, 1, 2, 3)
+    // =========================================================================
+    function FloatingParticles({ step, isMemory }) {
+      const stepEmojis = {
+        0: ['✨', '🌸', '🪔', '⭐', '🪷', '✨', '💛', '🌸'],
+        1: ['🪔', '🎇', '🎆', '🪔', '✨', '🎇', '🪔', '🌟'], // STEP 1: Diya & Sparkler
+        2: ['🐄', '🌿', '🦚', '⛰️', '🌾', '🐄', '🌿', '🍃'], // STEP 2: Cows & Leaves
+        3: ['💮', '🔴', '🍬', '🏵️', '🌺', '🔴', '💮', '✨'], // STEP 3: Flowers & Tika
+        memory: ['💖', '✨', '📸', '🌟', '🌸', '💫', '💖', '✨']
+      };
+
+      const emojis = isMemory ? stepEmojis.memory : (stepEmojis[step] || stepEmojis[0]);
+
+      // 14 deterministic particle channels for smooth 60fps vertical floating
+      const particles = [
+        { id: 1, left: '5%',  delay: '0s',    duration: '7.8s', size: '1.4rem' },
+        { id: 2, left: '19%', delay: '2.5s',  duration: '8.4s', size: '1.8rem' },
+        { id: 3, left: '33%', delay: '4.8s',  duration: '6.8s', size: '1.3rem' },
+        { id: 4, left: '49%', delay: '1.2s',  duration: '9.0s', size: '2.0rem' },
+        { id: 5, left: '64%', delay: '3.6s',  duration: '7.2s', size: '1.5rem' },
+        { id: 6, left: '81%', delay: '0.8s',  duration: '8.5s', size: '1.9rem' },
+        { id: 7, left: '93%', delay: '5.2s',  duration: '6.5s', size: '1.4rem' },
+        { id: 8, left: '12%', delay: '6.0s',  duration: '8.8s', size: '1.7rem' },
+        { id: 9, left: '26%', delay: '3.1s',  duration: '7.4s', size: '1.6rem' },
+        { id: 10, left: '42%', delay: '7.2s', duration: '9.2s', size: '1.3rem' },
+        { id: 11, left: '57%', delay: '5.5s', duration: '8.1s', size: '1.8rem' },
+        { id: 12, left: '73%', delay: '2.0s', duration: '7.8s', size: '1.5rem' },
+        { id: 13, left: '88%', delay: '4.2s', duration: '6.9s', size: '1.7rem' },
+        { id: 14, left: '2%',  delay: '4.9s', duration: '8.4s', size: '1.3rem' },
+      ];
+
+      return (
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+          {particles.map((p, idx) => (
+            <div
+              key={p.id}
+              className="floating-particle select-none"
+              style={{
+                left: p.left,
+                animationDelay: p.delay,
+                animationDuration: p.duration,
+                fontSize: p.size,
+                bottom: '-45px'
+              }}
+            >
+              {emojis[idx % emojis.length]}
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    // =========================================================================
+    // CIRCULAR GLOWING USER AVATAR
+    // =========================================================================
+    function UserAvatar({ user, size = 'large' }) {
+      const [imgSrc, setImgSrc] = useState(user?.photo || user?.fallbackPhoto);
+      const isLarge = size === 'large';
+
+      useEffect(() => {
+        setImgSrc(user?.photo || user?.fallbackPhoto);
+      }, [user]);
+
+      const handleError = () => {
+        if (imgSrc !== user?.fallbackPhoto && user?.fallbackPhoto) {
+          setImgSrc(user.fallbackPhoto);
+        } else {
+          setImgSrc(null);
+        }
+      };
+
+      return (
+        <div className="relative inline-block">
+          {/* Animated Golden Halo Glow */}
+          <div
+            className={`absolute -inset-1.5 rounded-full ${
+              isLarge
+                ? 'bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-300 blur-md opacity-85 animate-pulse'
+                : 'hidden'
+            }`}
+          ></div>
+
+          <div
+            className={`relative overflow-hidden rounded-full ring-4 ring-amber-400 ring-offset-2 ring-offset-[#250309] ${
+              isLarge
+                ? 'w-36 h-36 sm:w-44 sm:h-44 shadow-2xl glowing-circular-frame'
+                : 'w-16 h-16 shadow-lg'
+            }`}
+          >
+            {imgSrc ? (
+              <img
+                src={imgSrc}
+                alt={user?.name || 'User'}
+                onError={handleError}
+                style={{ objectPosition: user?.objectPosition || 'center' }}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-600 to-rose-700 text-white font-bold text-2xl">
+                {user?.name?.slice(0, 2) || '❤️'}
+              </div>
+            )}
+          </div>
+
+          {/* Decorative Corner Badge */}
+          {isLarge && (
+            <div className="absolute -bottom-1 -right-1 bg-amber-500 text-black text-xl w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-amber-200">
+              🪔
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // =========================================================================
+    // FLOATING AUDIO CONTROLLER (Top-Right)
+    // Features Play/Pause, Mute/Unmute & Dancing Wave Equalizer
+    // =========================================================================
+    function GlobalAudioController({ isPlaying, isMuted, onToggleMute, onTogglePlay }) {
+      return (
+        <div className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 flex items-center space-x-2 bg-black/45 backdrop-blur-md border border-white/20 rounded-full px-3 py-1.5 shadow-xl transition-all hover:bg-black/60">
+          {/* Animated Equalizer Wave */}
+          {isPlaying && !isMuted && (
+            <div className="flex items-end space-x-0.5 h-4 pr-1">
+              <span className="eq-bar"></span>
+              <span className="eq-bar"></span>
+              <span className="eq-bar"></span>
+            </div>
+          )}
+
+          {/* Play/Pause Button */}
+          <button
+            onClick={onTogglePlay}
+            aria-label={isPlaying ? 'Pause Audio' : 'Play Audio'}
+            className="w-8 h-8 rounded-full bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 flex items-center justify-center text-sm transition-transform active:scale-90"
+            title={isPlaying ? 'Pause Festive Music' : 'Play Festive Music'}
+          >
+            {isPlaying ? (
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+                <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+              </svg>
+            ) : (
+              <svg className="w-3.5 h-3.5 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            )}
+          </button>
+
+          {/* Floating Mute/Unmute Icon Button */}
+          <button
+            onClick={onToggleMute}
+            aria-label={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/90 flex items-center justify-center text-sm transition-transform active:scale-90"
+            title={isMuted ? 'Unmute' : 'Mute'}
+          >
+            {isMuted ? (
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              </svg>
+            )}
+          </button>
+        </div>
+      );
+    }
+
+    // =========================================================================
+    // MAIN APPLICATION COMPONENT
+    // =========================================================================
+    function App() {
+      // 1. STATE TRACKING: currentStep (0, 1, 2, 3) and selectedUser
+      const [currentStep, setCurrentStep] = useState(0);
+      const [selectedUser, setSelectedUser] = useState(null);
+
+      // Audio state
+      const [isPlaying, setIsPlaying] = useState(false);
+      const [isMuted, setIsMuted] = useState(false);
+      const audioRef = useRef(null);
+
+      // Initialize global audio element
+      useEffect(() => {
+        const audio = new Audio();
+        audio.loop = true;
+        audio.preload = 'auto';
+
+        // Fallback to soothing melody synthesizer if audio link fails or is CORS-blocked
+        audio.addEventListener('error', () => {
+          console.warn('Audio URL fallback: Starting Festive Melody Synthesizer.');
+          if (isPlaying && !isMuted) {
+            synthPlayer.start();
+          }
+        });
+
+        audioRef.current = audio;
+
+        return () => {
+          audio.pause();
+          synthPlayer.stop();
+        };
+      }, []);
+
+      // Function to start playing the selected user's song
+      const startUserAudio = (user) => {
+        const audioUrl = user?.audio || FAMILY_DATA[0].audio;
+        if (audioRef.current) {
+          audioRef.current.src = audioUrl;
+          audioRef.current.muted = isMuted;
+          const playPromise = audioRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => setIsPlaying(true))
+              .catch((err) => {
+                console.log('Autoplay restriction or audio failure, fallback synth activated:', err);
+                synthPlayer.start();
+                setIsPlaying(true);
+              });
+          }
+        }
+      };
+
+      // Toggle Play/Pause
+      const handleTogglePlay = () => {
+        if (isPlaying) {
+          if (audioRef.current) audioRef.current.pause();
+          synthPlayer.stop();
+          setIsPlaying(false);
+        } else {
+          if (audioRef.current && audioRef.current.src) {
+            audioRef.current.play().catch(() => synthPlayer.start());
+          } else {
+            synthPlayer.start();
+          }
+          setIsPlaying(true);
+        }
+      };
+
+      // Toggle Mute/Unmute
+      const handleToggleMute = () => {
+        const nextMute = !isMuted;
+        setIsMuted(nextMute);
+        if (audioRef.current) {
+          audioRef.current.muted = nextMute;
+        }
+        if (nextMute) {
+          synthPlayer.stop();
+        } else if (isPlaying) {
+          if (audioRef.current && audioRef.current.paused) {
+            synthPlayer.start();
+          }
+        }
+      };
+
+      // -------------------------------------------------------------
+      // STEP 0 -> STEP 1: Select User & Start Audio
+      // -------------------------------------------------------------
+      const handleSelectMember = (user) => {
+        setSelectedUser(user);
+        setCurrentStep(1);
+        startUserAudio(user);
+        fireConfetti();
+      };
+
+      // -------------------------------------------------------------
+      // STEP 1 -> STEP 2: Advance to Govardhan Pooja
+      // -------------------------------------------------------------
+      const handleAdvanceToGovardhan = () => {
+        setCurrentStep(2);
+        fireConfetti();
+      };
+
+      // -------------------------------------------------------------
+      // STEP 2 -> STEP 3: Advance to Bhai Dooj
+      // -------------------------------------------------------------
+      const handleAdvanceToBhaiDooj = () => {
+        setCurrentStep(3);
+        fireConfetti();
+      };
+
+      // -------------------------------------------------------------
+      // STEP 3 Action: "Shuruat Se Dekhein" (Reset step, user & audio)
+      // -------------------------------------------------------------
+      const handleStartOver = () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0;
+        }
+        synthPlayer.stop();
+        setIsPlaying(false);
+        setSelectedUser(null);
+        setCurrentStep(0);
+      };
+
+      // Share Greeting to WhatsApp
+      const handleShareWhatsApp = () => {
+        if (!selectedUser) return;
+        const msg = `🪔✨ त्यौहार अपनों के साथ ✨🪔\n\nDearest ${selectedUser.name}, wishing you a joyful Diwali, Govardhan Pooja & Bhai Dooj with love and blessings!\n\nOpen your festive greeting: ${window.location.href}`;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+      };
+
+      // Check if Memory showcase is selected
+      const isMemorySelected = selectedUser?.id === 'memory';
+
+      // Festival-specific dynamic background classes
+      const festivalBgClass = isMemorySelected
+        ? 'bg-festival-memory'
+        : ({
+            0: 'bg-festival-0',
+            1: 'bg-festival-1',
+            2: 'bg-festival-2',
+            3: 'bg-festival-3'
+          }[currentStep] || 'bg-festival-0');
+
+      // Festival-specific ambient glow lights
+      const festivalGlows = isMemorySelected
+        ? { top: 'bg-pink-600/30', bottom: 'bg-amber-600/30', center: 'bg-rose-500/20' }
+        : ({
+            0: { top: 'bg-orange-600/20', bottom: 'bg-red-600/20', center: 'bg-amber-500/15' },
+            1: { top: 'bg-amber-400/35', bottom: 'bg-orange-600/40', center: 'bg-yellow-400/25' }, // Diwali: Rich Golden/Orange glow
+            2: { top: 'bg-emerald-400/35', bottom: 'bg-teal-500/40', center: 'bg-lime-400/25' },    // Govardhan: Sacred Emerald/Teal glow
+            3: { top: 'bg-rose-400/35', bottom: 'bg-pink-600/40', center: 'bg-amber-400/25' }       // Bhai Dooj: Auspicious Rose/Tika crimson glow
+          }[currentStep] || { top: 'bg-orange-600/20', bottom: 'bg-red-600/20', center: 'bg-amber-500/15' });
+
+      return (
+        <div className="min-h-screen relative flex flex-col justify-between overflow-x-hidden p-3 sm:p-6">
+
+          {/* Dynamic Festival Background Layer with 1.2s crossfade transition */}
+          <div className={`festival-bg-layer ${festivalBgClass}`}></div>
+
+          {/* Dynamic Background Floating Particle Elements (Diyas, Cows, Flowers, etc.) */}
+          <FloatingParticles step={currentStep} isMemory={isMemorySelected} />
+
+          {/* Ambient Warm Festive Lights matching current festival */}
+          <div className={`fixed top-[-10%] left-[-10%] w-[340px] h-[340px] rounded-full blur-[100px] pointer-events-none transition-all duration-1000 ${festivalGlows.top}`}></div>
+          <div className={`fixed bottom-[-10%] right-[-10%] w-[400px] h-[400px] rounded-full blur-[110px] pointer-events-none transition-all duration-1000 ${festivalGlows.bottom}`}></div>
+          <div className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full blur-[120px] pointer-events-none transition-all duration-1000 ${festivalGlows.center}`}></div>
+
+          {/* Global Floating Audio Controller (Top-Right) */}
+          <GlobalAudioController
+            isPlaying={isPlaying}
+            isMuted={isMuted}
+            onToggleMute={handleToggleMute}
+            onTogglePlay={handleTogglePlay}
+          />
+
+          {/* Top Brand Banner */}
+          <header className="relative z-20 flex items-center justify-between w-full max-w-md mx-auto pt-2 pb-1">
+            <div className="flex items-center space-x-2">
+              <span className="text-xl">🪔</span>
+              <span className="text-xs uppercase tracking-widest text-amber-300 font-bold">Festive Greeting</span>
+            </div>
+            {currentStep > 0 && selectedUser && (
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-amber-200">
+                For: {selectedUser.name}
+              </span>
+            )}
+          </header>
+
+          {/* Step Progress Tracker (Steps 1, 2, 3) */}
+          {currentStep > 0 && (
+            <div className="relative z-20 w-full max-w-xs mx-auto mt-2 mb-2 flex items-center justify-between px-3 py-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 text-xs">
+              <div className={`flex items-center space-x-1 ${currentStep === 1 ? 'text-amber-300 font-bold' : 'text-white/60'}`}>
+                <span>🪔</span>
+                <span>Diwali</span>
+              </div>
+              <span className="text-white/20">➔</span>
+              <div className={`flex items-center space-x-1 ${currentStep === 2 ? 'text-emerald-300 font-bold' : 'text-white/60'}`}>
+                <span>🐄</span>
+                <span>Govardhan</span>
+              </div>
+              <span className="text-white/20">➔</span>
+              <div className={`flex items-center space-x-1 ${currentStep === 3 ? 'text-rose-300 font-bold' : 'text-white/60'}`}>
+                <span>💮</span>
+                <span>Bhai Dooj</span>
+              </div>
+            </div>
+          )}
+
+          {/* =========================================================================
+              MAIN CONTENT CONTAINER (Centered Glassmorphism Cards)
+             ========================================================================= */}
+          <main className="relative z-20 w-full max-w-md mx-auto my-auto py-2">
+
+            {/* -------------------------------------------------------------
+                STEP 0: WELCOME SCREEN
+               ------------------------------------------------------------- */}
+            {currentStep === 0 && (
+              <div className="glass-box rounded-xl p-5 sm:p-7 text-center step-transition">
+                {/* Decorative Diya Icon */}
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-tr from-amber-500/30 to-orange-500/20 border border-amber-400/40 mb-3 shadow-[0_0_20px_rgba(251,191,36,0.3)] animate-pulse">
+                  <span className="text-3xl">🪔</span>
+                </div>
+
+                {/* Title */}
+                <h1 className="font-hindi text-3xl sm:text-4xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 drop-shadow-md mb-2">
+                  त्यौहार अपनों के साथ
+                </h1>
+
+                {/* Subtitle */}
+                <div className="mb-6 space-y-1 text-xs sm:text-sm text-amber-100/90 leading-relaxed font-light">
+                  <p className="font-medium text-amber-200">
+                    भाइयों और बहनों का प्यार, बस आपके नाम का इंतज़ार!
+                  </p>
+                  <p className="text-white/70 text-[11px] sm:text-xs">
+                    A special greeting from the family, just one tap away!
+                  </p>
+                </div>
+
+                {/* Responsive Grid of Glassmorphism Buttons */}
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 text-left">
+                  {FAMILY_DATA.map((member) => (
+                    <button
+                      key={member.id}
+                      onClick={() => handleSelectMember(member)}
+                      className="glass-btn rounded-xl p-3 sm:p-3.5 flex flex-col items-center text-center cursor-pointer relative overflow-hidden group"
+                    >
+                      {/* Top Accent Gradient Border */}
+                      <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+
+                      {/* Avatar */}
+                      <div className="relative mb-2 mt-1">
+                        <UserAvatar user={member} size="small" />
+                        <span className="absolute -bottom-1 -right-1 text-xs bg-amber-400 text-black rounded-full px-1 shadow font-bold">
+                          {member.id === 'memory' ? '📸' : member.relation.includes('Brother') ? '👦' : '👧'}
+                        </span>
+                      </div>
+
+                      {/* English & Hindi Names */}
+                      <span className="font-semibold text-sm sm:text-base text-white group-hover:text-amber-300 transition-colors line-clamp-1">
+                        {member.name}
+                      </span>
+                      {member.hindiName && (
+                        <span className="text-[11px] text-amber-200/80 font-hindi -mt-0.5">
+                          {member.hindiName}
+                        </span>
+                      )}
+
+                      {/* Relationship Pill */}
+                      <span className={`mt-1 text-[10px] px-2 py-0.5 rounded-full border ${member.tagColor}`}>
+                        {member.relation}
+                      </span>
+
+                      {/* Tap Prompt */}
+                      <div className="mt-2 text-[10px] text-amber-300/80 group-hover:text-amber-200 flex items-center space-x-1 font-medium">
+                        <span>Tap to Open</span>
+                        <span className="group-hover:translate-x-0.5 transition-transform">
+                          {member.id === 'memory' ? '💖' : '🪔'}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-5 text-[11px] text-white/50 flex items-center justify-center space-x-1">
+                  <span>🎵 Music starts automatically on selection</span>
+                </div>
+              </div>
+            )}
+
+            {/* -------------------------------------------------------------
+                MEMORY SCREEN: GOLDEN FAMILY MEMORIES (100% ENGLISH)
+               ------------------------------------------------------------- */}
+            {selectedUser && selectedUser.isMemory && (
+              <div className="glass-box rounded-2xl p-4 sm:p-7 text-center step-transition border border-amber-400/40 relative">
+                {/* Memory Badge */}
+                <div className="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-3 shadow-sm">
+                  <span>📸</span>
+                  <span>Golden Family Memories</span>
+                  <span>💖</span>
+                </div>
+
+                {/* Main Header in English */}
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-400 mb-1">
+                  Family: Where Life Begins & Love Never Ends
+                </h2>
+                <p className="text-xs sm:text-sm text-amber-200/80 mb-3 font-medium">
+                  Precious moments etched in time, cherished forever in our hearts.
+                </p>
+
+                {/* True Lines Box (Heartfelt Truths in 100% English) */}
+                <div className="my-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-amber-500/15 via-black/55 to-orange-500/15 border-2 border-amber-400/50 shadow-xl text-center space-y-3.5">
+                  <div className="text-[11px] uppercase tracking-widest text-amber-300 font-bold flex items-center justify-center space-x-2">
+                    <span>✨</span>
+                    <span>Words from the Heart</span>
+                    <span>✨</span>
+                  </div>
+
+                  {/* Line 1 */}
+                  <div>
+                    <p className="text-sm sm:text-base text-amber-100 font-semibold leading-relaxed">
+                      "Family is not just an important thing. It's everything — built on love, trust, and unconditional presence."
+                    </p>
+                  </div>
+
+                  {/* Line 2 */}
+                  <div className="pt-2.5 border-t border-white/10">
+                    <p className="text-sm sm:text-base text-amber-100 font-semibold leading-relaxed">
+                      "A parents' sheltering blessing is life's strongest foundation; a sibling's laughter is its greatest treasure."
+                    </p>
+                  </div>
+
+                  {/* Line 3 */}
+                  <div className="pt-2.5 border-t border-white/10">
+                    <p className="text-xs sm:text-sm text-amber-200 font-medium italic leading-relaxed">
+                      "No matter where life takes us, the memories we create together will forever keep our hearts bound as one. 💖"
+                    </p>
+                  </div>
+                </div>
+
+                {/* Photo Gallery Showcase (All 7 precious family memory photos) */}
+                <div className="space-y-4 my-5 text-left">
+                  {selectedUser.photos && selectedUser.photos.map((item, idx) => (
+                    <div key={idx} className="rounded-2xl overflow-hidden border-2 border-white/20 shadow-[0_0_20px_rgba(251,191,36,0.25)] relative group bg-black/40">
+                      <img
+                        src={item.url}
+                        alt={item.title}
+                        className="w-full h-auto max-h-80 object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="p-3.5 bg-gradient-to-t from-black/95 via-black/85 to-black/30">
+                        <h3 className="text-base sm:text-lg font-bold text-amber-300 flex items-center space-x-1.5">
+                          <span>🖼️</span>
+                          <span>{item.title}</span>
+                        </h3>
+                        <p className="text-xs sm:text-sm text-amber-100/90 mt-1 leading-snug">
+                          {item.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="space-y-3 mt-6">
+                  {/* Return to Home Screen */}
+                  <button
+                    onClick={handleStartOver}
+                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 hover:from-amber-300 hover:via-orange-400 hover:to-rose-400 text-black font-bold text-base sm:text-lg shadow-[0_0_25px_rgba(251,191,36,0.5)] transform active:scale-95 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <span>Back to Home Screen</span>
+                    <span className="text-lg">↺</span>
+                  </button>
+
+                  {/* Share Memories */}
+                  <button
+                    onClick={handleShareWhatsApp}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-xs sm:text-sm border border-white/20 flex items-center justify-center space-x-2 transition-all active:scale-95"
+                  >
+                    <span>Share Family Memories on WhatsApp</span>
+                    <span>📱</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* -------------------------------------------------------------
+                STEP 1: HAPPY DIWALI (🪔 & 🎇)
+               ------------------------------------------------------------- */}
+            {currentStep === 1 && selectedUser && !selectedUser.isMemory && (
+              <div className="glass-box rounded-xl p-5 sm:p-7 text-center step-transition border border-amber-400/30 relative">
+                {/* Festival Badge */}
+                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-3 shadow-sm">
+                  <span>✨</span>
+                  <span>Festival of Lights</span>
+                  <span>🪔</span>
+                </div>
+
+                {/* Center UI: Circular Photo with Glowing Gold Frame */}
+                <div className="flex justify-center mb-4">
+                  <UserAvatar user={{ ...selectedUser, photo: selectedUser.diwaliPhoto || selectedUser.photo }} size="large" />
+                </div>
+
+                {/* Greeting */}
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-400 mb-1">
+                  Happy Diwali, {selectedUser.name}!
+                </h2>
+                <p className="font-hindi text-lg sm:text-xl text-amber-300 mb-2 font-semibold">
+                  शुभ दीपावली!
+                </p>
+
+                {/* Festival-Specific Real Celebration Photo Showcase */}
+                {selectedUser.diwaliPhoto && (
+                  <div className="my-3 rounded-2xl overflow-hidden border-2 border-amber-400/60 shadow-[0_0_25px_rgba(251,191,36,0.35)] relative group">
+                    <img
+                      src={selectedUser.diwaliPhoto}
+                      alt="Diwali Memory"
+                      className="w-full h-auto max-h-72 object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-2 text-center text-xs text-amber-200 font-medium">
+                      🪔 {selectedUser.name} के साथ जगमगाती दीपावली की सुंदर स्मृति ✨
+                    </div>
+                  </div>
+                )}
+
+                {/* Festival Shayari Box */}
+                {selectedUser.diwaliShayari && (
+                  <div className="my-3 p-4 rounded-xl bg-gradient-to-br from-amber-500/20 via-orange-500/15 to-amber-600/20 border-2 border-amber-400/50 shadow-lg text-center">
+                    <div className="text-[11px] uppercase tracking-widest text-amber-300 font-bold mb-1.5 flex items-center justify-center space-x-1.5">
+                      <span>✨</span>
+                      <span>4 लाइन आपके लिए</span>
+                      <span>✨</span>
+                    </div>
+                    <p className="font-hindi text-sm sm:text-base text-amber-100 leading-relaxed whitespace-pre-line font-medium drop-shadow">
+                      {selectedUser.diwaliShayari}
+                    </p>
+                  </div>
+                )}
+
+                {/* Festive Blessing Message */}
+                <div className="glass-btn bg-black/25 rounded-xl p-3.5 mb-5 border border-white/15 text-xs sm:text-sm text-amber-100/90 leading-relaxed text-center space-y-2">
+                  <p className="font-medium text-amber-200">
+                    दीपावली के इस पावन पर्व पर आपके जीवन में सुख, समृद्धि और अपार खुशियाँ आएं। दीपों की रोशनी से आपका हर दिन जगमगाता रहे!
+                  </p>
+                  <p className="text-white/80 text-[11px] sm:text-xs italic">
+                    "{selectedUser.diwaliWish}"
+                  </p>
+                </div>
+
+                {/* Pulsing Action Button: "Aage Badhein" */}
+                <button
+                  onClick={handleAdvanceToGovardhan}
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:via-orange-400 hover:to-amber-500 text-black font-bold text-base sm:text-lg shadow-[0_0_25px_rgba(245,158,11,0.5)] transform active:scale-95 transition-all duration-300 flex items-center justify-center space-x-2 animate-pulse"
+                >
+                  <span>Aage Badhein</span>
+                  <span className="text-xl">➜</span>
+                </button>
+
+                <p className="mt-3 text-[11px] text-amber-200/60">
+                  Next: Govardhan Pooja Blessing 🐄
+                </p>
+              </div>
+            )}
+
+            {/* -------------------------------------------------------------
+                STEP 2: HAPPY GOVARDHAN POOJA (🐄 & 🌿)
+               ------------------------------------------------------------- */}
+            {currentStep === 2 && selectedUser && !selectedUser.isMemory && (
+              <div className="glass-box rounded-xl p-5 sm:p-7 text-center step-transition border border-emerald-400/30 relative">
+                {/* Festival Badge */}
+                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-3 shadow-sm">
+                  <span>🌿</span>
+                  <span>Annakoot & Nature's Bounty</span>
+                  <span>🐄</span>
+                </div>
+
+                {/* Center UI: User Photo with Emerald Glow */}
+                <div className="flex justify-center mb-4">
+                  <UserAvatar user={{ ...selectedUser, photo: selectedUser.govardhanPhoto || selectedUser.photo }} size="large" />
+                </div>
+
+                {/* Greeting */}
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-amber-200 to-yellow-300 mb-1">
+                  Happy Govardhan Pooja, {selectedUser.name}!
+                </h2>
+                <p className="font-hindi text-lg sm:text-xl text-emerald-300 mb-2 font-semibold">
+                  गोवर्धन पूजा की हार्दिक शुभकामनाएँ!
+                </p>
+
+                {/* Festival-Specific Real Celebration Photo Showcase */}
+                {selectedUser.govardhanPhoto && (
+                  <div className="my-3 rounded-2xl overflow-hidden border-2 border-emerald-400/60 shadow-[0_0_25px_rgba(16,185,129,0.35)] relative group">
+                    <img
+                      src={selectedUser.govardhanPhoto}
+                      alt="Govardhan Memory"
+                      className="w-full h-auto max-h-72 object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-2 text-center text-xs text-emerald-200 font-medium">
+                      🐄 {selectedUser.name} के साथ गोवर्धन पूजा की पावन स्मृति 🌿
+                    </div>
+                  </div>
+                )}
+
+                {/* Festival Shayari Box */}
+                {selectedUser.govardhanShayari && (
+                  <div className="my-3 p-4 rounded-xl bg-gradient-to-br from-emerald-500/20 via-teal-500/15 to-emerald-600/20 border-2 border-emerald-400/50 shadow-lg text-center">
+                    <div className="text-[11px] uppercase tracking-widest text-emerald-300 font-bold mb-1.5 flex items-center justify-center space-x-1.5">
+                      <span>🌿</span>
+                      <span>4 लाइन आपके लिए</span>
+                      <span>🌿</span>
+                    </div>
+                    <p className="font-hindi text-sm sm:text-base text-emerald-100 leading-relaxed whitespace-pre-line font-medium drop-shadow">
+                      {selectedUser.govardhanShayari}
+                    </p>
+                  </div>
+                )}
+
+                {/* Festive Blessing Message */}
+                <div className="glass-btn bg-black/25 rounded-xl p-3.5 mb-5 border border-white/15 text-xs sm:text-sm text-emerald-100/90 leading-relaxed text-center space-y-2">
+                  <p className="font-medium text-emerald-200">
+                    भगवान श्री कृष्ण आप और आपके परिवार पर अपनी कृपा सदा बनाए रखें। गोवर्धन महाराज आपके जीवन में सुख, शांति और समृद्धि भर दें।
+                  </p>
+                  <p className="text-white/80 text-[11px] sm:text-xs italic">
+                    "{selectedUser.govardhanWish}"
+                  </p>
+                </div>
+
+                {/* Pulsing Action Button: "Aage Badhein" */}
+                <button
+                  onClick={handleAdvanceToBhaiDooj}
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-500 via-amber-500 to-yellow-500 hover:from-emerald-400 hover:via-amber-400 hover:to-yellow-400 text-black font-bold text-base sm:text-lg shadow-[0_0_25px_rgba(16,185,129,0.5)] transform active:scale-95 transition-all duration-300 flex items-center justify-center space-x-2 animate-pulse"
+                >
+                  <span>Aage Badhein</span>
+                  <span className="text-xl">➜</span>
+                </button>
+
+                <p className="mt-3 text-[11px] text-emerald-200/60">
+                  Next: Bhai Dooj Special 💮🔴
+                </p>
+              </div>
+            )}
+
+            {/* -------------------------------------------------------------
+                STEP 3: HAPPY BHAI DOOJ (💮 & 🔴)
+               ------------------------------------------------------------- */}
+            {currentStep === 3 && selectedUser && !selectedUser.isMemory && (
+              <div className="glass-box rounded-xl p-5 sm:p-7 text-center step-transition border border-rose-400/30 relative">
+                {/* Festival Badge */}
+                <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-400/40 text-rose-300 text-xs font-semibold uppercase tracking-wider mb-3 shadow-sm">
+                  <span>💮</span>
+                  <span>Sacred Bond of Sibling Love</span>
+                  <span>🔴</span>
+                </div>
+
+                {/* Center UI: User Photo */}
+                <div className="flex justify-center mb-4">
+                  <UserAvatar user={{ ...selectedUser, photo: selectedUser.bhaiDoojPhoto || selectedUser.photo }} size="large" />
+                </div>
+
+                {/* Greeting */}
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-pink-200 to-amber-300 mb-1">
+                  Happy Bhai Dooj, {selectedUser.name}!
+                </h2>
+                <p className="font-hindi text-lg sm:text-xl text-rose-300 mb-2 font-semibold">
+                  भाई दूज की ढेरों शुभकामनाएँ!
+                </p>
+
+                {/* Festival-Specific Real Celebration Photo Showcase */}
+                {selectedUser.bhaiDoojPhoto && (
+                  <div className="my-3 rounded-2xl overflow-hidden border-2 border-rose-400/60 shadow-[0_0_25px_rgba(244,63,94,0.35)] relative group">
+                    <img
+                      src={selectedUser.bhaiDoojPhoto}
+                      alt="Bhai Dooj Memory"
+                      className="w-full h-auto max-h-72 object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-2 text-center text-xs text-rose-200 font-medium">
+                      💮 {selectedUser.name} के साथ भाई दूज का पावन टीका व मंगल आशीर्वाद 🔴
+                    </div>
+                  </div>
+                )}
+
+                {/* Festival Shayari Box */}
+                {selectedUser.bhaiDoojShayari && (
+                  <div className="my-3 p-4 rounded-xl bg-gradient-to-br from-rose-500/20 via-pink-500/15 to-rose-600/20 border-2 border-rose-400/50 shadow-lg text-center">
+                    <div className="text-[11px] uppercase tracking-widest text-rose-300 font-bold mb-1.5 flex items-center justify-center space-x-1.5">
+                      <span>💮</span>
+                      <span>4 लाइन आपके लिए</span>
+                      <span>💮</span>
+                    </div>
+                    <p className="font-hindi text-sm sm:text-base text-rose-100 leading-relaxed whitespace-pre-line font-medium drop-shadow">
+                      {selectedUser.bhaiDoojShayari}
+                    </p>
+                  </div>
+                )}
+
+                {/* Festive Blessing Message */}
+                <div className="glass-btn bg-black/25 rounded-xl p-3.5 mb-5 border border-white/15 text-xs sm:text-sm text-rose-100/90 leading-relaxed text-center space-y-2">
+                  <p className="font-medium text-rose-200">
+                    भाई-बहन के अटूट विश्वास, स्नेह और समर्पण के इस पावन पर्व पर हार्दिक बधाई। यह पवित्र रिश्ता जीवन भर यूं ही महकता रहे!
+                  </p>
+                  <p className="text-white/80 text-[11px] sm:text-xs italic">
+                    "{selectedUser.bhaiDoojWish}"
+                  </p>
+                </div>
+
+                {/* Special Siblings Memory Photo (if available) */}
+                {selectedUser.extraPhoto && (
+                  <div className="my-3 rounded-2xl overflow-hidden border-2 border-rose-400/50 shadow-[0_0_20px_rgba(244,63,94,0.3)] relative group">
+                    <img
+                      src={selectedUser.extraPhoto}
+                      alt="Siblings Memory"
+                      className="w-full h-auto max-h-72 object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-2 text-center text-xs text-rose-200 font-medium">
+                      💖 भाई-बहनों का अटूट प्यार व सुंदर यादें ✨
+                    </div>
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  {/* Reset Button: "Shuruat Se Dekhein" */}
+                  <button
+                    onClick={handleStartOver}
+                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 hover:from-amber-300 hover:via-orange-400 hover:to-rose-400 text-black font-bold text-base sm:text-lg shadow-[0_0_25px_rgba(244,63,94,0.5)] transform active:scale-95 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <span>Shuruat Se Dekhein</span>
+                    <span className="text-lg">↺</span>
+                  </button>
+
+                  {/* Share on WhatsApp */}
+                  <button
+                    onClick={handleShareWhatsApp}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-xs sm:text-sm border border-white/20 flex items-center justify-center space-x-2 transition-all active:scale-95"
+                  >
+                    <span>Share with {selectedUser.name}</span>
+                    <span>📱</span>
+                  </button>
+                </div>
+
+                <p className="mt-3 text-[11px] text-white/50">
+                  Resets to home screen & stops audio
+                </p>
+              </div>
+            )}
+
+          </main>
+
+          {/* Footer Note */}
+          <footer className="relative z-20 text-center text-[11px] text-white/40 py-2">
+            Made with ❤️ for Vishnu Bhai, Krishna Bhai, Kamlesh Didi, Vimlesh Didi, Membati Didi & Family
+          </footer>
+        </div>
+      );
+    }
+
+    // Render App
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

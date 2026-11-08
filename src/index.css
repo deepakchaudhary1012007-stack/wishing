@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a0105;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+}
+
+/* Glassmorphism Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(251, 191, 36, 0.5);
+  transform: translateY(-3px) scale(1.02);
+}
+.glass-card-active:active {
+  transform: scale(0.97);
+}
+
+/* Screen Transitions */
+.screen-fade-in {
+  animation: screenEnter 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes screenEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Floating Particles */
+@keyframes floatUp {
+  0% {
+    transform: translateY(105vh) translateX(0) scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  90% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(25px) scale(1.1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.floating-item {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  will-change: transform, opacity;
+  animation-name: floatUp;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Glowing Gold Photo Ring */
+.glow-gold-border-pulse {
+  animation: goldHaloPulse 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes goldHaloPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5), 0 0 40px rgba(245, 158, 11, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 35px rgba(251, 191, 36, 0.9), 0 0 65px rgba(234, 88, 12, 0.6);
+  }
+}
+
+/* Audio Wave Equalizer */
+.eq-bar {
+  width: 3px;
+  background-color: #facc15;
+  border-radius: 9999px;
+  animation: eqBounce 1s ease-in-out infinite alternate;
+}
+.eq-bar:nth-child(1) { animation-delay: 0.1s; height: 14px; }
+.eq-bar:nth-child(2) { animation-delay: 0.3s; height: 20px; }
+.eq-bar:nth-child(3) { animation-delay: 0.5s; height: 10px; }
+.eq-bar:nth-child(4) { animation-delay: 0.2s; height: 18px; }
+
+@keyframes eqBounce {
+  0% { transform: scaleY(0.3); }
+  100% { transform: scaleY(1); }
+}
+
+
+/* Festival-Themed Dynamic Backgrounds */
+.bg-festival-0 {
+  background: linear-gradient(145deg, #180206 0%, #380512 35%, #580d1d 70%, #7c220a 100%);
+}
+.bg-festival-1 {
+  /* Deep Diwali Night with Golden Flame Glow */
+  background: linear-gradient(145deg, #160205 0%, #3e0712 25%, #6a1415 50%, #99310c 75%, #b45309 100%);
+}
+.bg-festival-2 {
+  /* Sacred Govardhan Emerald Green & Nature Forest Teal */
+  background: linear-gradient(145deg, #01140e 0%, #043627 25%, #064e3b 50%, #065f46 75%, #0c3e2f 100%);
+}
+.bg-festival-3 {
+  /* Auspicious Bhai Dooj Crimson Red, Rose Pink & Tilak Gold */
+  background: linear-gradient(145deg, #1f020c 0%, #3e0517 25%, #690c2a 50%, #881337 75%, #9f1239 100%);
+}
+
+.festival-bg-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 1.2s ease-in-out;
+}
